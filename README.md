@@ -1,1 +1,83 @@
-This project presents a real-time, automated system for detecting traffic violations and accidents using surveillance video footage. The system integrates a deep learning-based computer vision pipeline comprising object detection, multi-object tracking, incident classification, license plate recognition, and traffic flow analysis. YOLOv8 is used for detecting various vehicle types, while Deep SORT and ByteTrack enable consistent tracking of individual vehicles across frames. A MobileNetV2 classifier is trained to recognize different types of accidents such as rear collisions, rollovers, and pedestrian hits based on a custom dataset of extracted video frames. License plate information is captured using EasyOCR, and vehicle speed is estimated through frame-by-frame motion analysis. The processed results including bounding boxes, IDs, speeds, and alerts are visualized directly on the video using OpenCV. This system offers a scalable, efficient, and accurate solution for enhancing road safety and enabling smarter traffic law enforcement through automated video surveillance.# SMART-TRAFFIC-SURVEILLANCE-SYSTEM
+# 🚦 Video-Based Traffic Surveillance System
+
+This project presents a real-time, automated **Traffic Surveillance System** that detects **traffic violations**, **accidents**, and performs **traffic flow analysis** using deep learning and computer vision techniques on live or recorded video feeds. The system utilizes a combination of YOLOv8, Deep SORT, ByteTrack, MobileNetV2, and EasyOCR to provide a comprehensive, scalable solution for smarter traffic law enforcement.
+
+## 📌 Key Features
+
+-  Vehicle detection using **YOLOv8**
+-  Multi-object tracking with **Deep SORT** and **ByteTrack**
+-  Accident classification using **MobileNetV2**
+-  License plate recognition via **EasyOCR**
+- Speed estimation using motion analysis
+- Traffic flow analysis (Free Flow / Moderate / Congested)
+- **Email and SMS alerts sent to the nearest police station** when violations are detected
+-  Real-time visualization with OpenCV overlays
+
+---
+
+## 🧠 Technologies Used
+
+| Task                        | Technology / Framework |
+|-----------------------------|-------------------------|
+| Vehicle Detection           | YOLOv8 (Ultralytics)    |
+| Object Tracking             | Deep SORT, ByteTrack   |
+| Incident Classification     | MobileNetV2             |
+| License Plate Recognition   | EasyOCR                 |
+| Notification System         | SMTP (Email), Twilio (SMS) |
+| Visualization               | OpenCV                  |
+| Backend Language            | Python 3.8+             |
+| Deep Learning Framework     | PyTorch                 |
+
+---
+
+## 🛠️ Project Modules
+
+### 1.  Frame Extraction
+Extracts every 30th frame from raw traffic videos using OpenCV. Frames are categorized for training accident classifier models.
+
+### 2.  Vehicle Detection (YOLOv8)
+Detects various vehicle types (car, truck, bus, motorcycle) in each video frame.
+
+### 3. Multi-Object Tracking (Deep SORT / ByteTrack)
+Assigns unique IDs to track vehicles consistently across frames.
+
+### 4.  Incident Classification (MobileNetV2)
+Classifies accidents such as:
+- Rear-end collision
+- Rollover
+- Pedestrian hit
+- Skidding
+- Fire or explosion
+- Head-on collision
+
+### 5. License Plate Recognition (EasyOCR)
+Detects and reads license plates from cropped vehicle regions for identification.
+
+### 6.  Speed Estimation
+Estimates vehicle speeds by tracking movement across frames using centroid displacement.
+
+### 7.  Traffic Flow Analysis
+Monitors the density and speed of vehicles to classify traffic as:
+- `Free Flow`
+- `Moderate`
+- `Congested`
+
+### 8.  Email & SMS Alerts to Police Stations
+When an accident is detected:
+- An **email** is sent with the incident details, vehicle info, and video snapshot.
+- An **SMS alert** is sent using Twilio or similar service with a quick summary and GPS coordinates.
+- Contact information for the nearest police station is retrieved via geolocation services or pre-configured.
+
+---
+
+## 🚀 How to Run
+
+
+
+# Install required dependencies
+pip install -r requirements.txt
+
+# Add your credentials in config/notification_config.py (Email, SMS API)
+
+# Run the main application
+python main.py
